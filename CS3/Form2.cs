@@ -28,13 +28,14 @@ namespace CS3
                 timer1.Interval = rndi1.Next(3499, 5500);
                 timer2.Interval = rndi2.Next(1499, 3500);
             }
+            this.TopMost = true;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = FormBorderStyle.None;
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            this.TopMost = true;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.FormBorderStyle = FormBorderStyle.None;
+
             using (var rng = new RNGCryptoServiceProvider())
             {
                 // 厳密にランダムなInt32を作る
@@ -43,7 +44,7 @@ namespace CS3
                 var seed = BitConverter.ToInt32(buffer, 0);
                 // そのseedを基にRandomを作る
                 Random rand = new Random(seed);
-                int r = rand.Next(-1, 11);
+                int r = rand.Next(-1, 10);
                 string path = "./file/1.png";
                 switch (r)
                 {
