@@ -21,6 +21,10 @@ namespace CS3
         public Form1()
         {
             InitializeComponent();
+            if (files.Length == 0) {
+                MessageBox.Show("fileフォルダにpngファイルが入っていません","Warning",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                Environment.Exit(0);
+            }
             foreach (string i in files)
             {
                 System.Console.WriteLine("{0} ", i);
