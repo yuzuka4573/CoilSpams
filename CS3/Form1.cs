@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using System.IO;
 
 namespace CS3
 {
@@ -16,9 +17,14 @@ namespace CS3
         public int mouse_Y;
         public int form_move_start = 0;
         public int c = 0;
+        public string [] files = Directory.GetFiles("./file","*.png");
         public Form1()
         {
             InitializeComponent();
+            foreach (string i in files)
+            {
+                System.Console.WriteLine("{0} ", i);
+            }
             this.MouseMove += new MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new MouseEventHandler(this.Form1_MouseUp);
             this.MouseDown += new MouseEventHandler(this.Form1_MouseDown);
@@ -41,9 +47,9 @@ namespace CS3
             Console.WriteLine("interval: " + timer1.Interval);
             c++; 
             Console.WriteLine(c);
-            if (c < 750)
+            if (c < 150)
             {
-                if (timer1.Interval > 30)
+                if (timer1.Interval > 10)
                 {
                     Console.WriteLine("speed up!!");
                     timer1.Interval = timer1.Interval - 5;
@@ -72,41 +78,11 @@ namespace CS3
                 var seed = BitConverter.ToInt32(buffer, 0);
                 // そのseedを基にRandomを作る
                 Random rand = new Random(seed);
-                int r = rand.Next(-1, 11);
-                string path ="./file/1.png";
-                switch (r)
-                {
-                    case 0:
-                        path = "./file/1.png";
-                        break;
-                    case 1:
-                        path = "./file/2.png";
-                        break;
-                    case 2:
-                        path = "./file/3.png";
-                        break;
-                    case 3:
-                        path = "./file/4.png";
-                        break;
-                    case 4:
-                        path = "./file/5.png";
-                        break;
-                    case 5:
-                        path = "./file/6.png";
-                        break;
-                    case 6:
-                        path = "./file/7.png";
-                        break;
-                    case 7:
-                        path = "./file/8.png";
-                        break;
-                    case 8:
-                        path = "./file/9.png";
-                        break;
-                    case 9:
-                        path = "./file/10.png";
-                        break;
-                }
+                int file_num = files.Length;
+                Console.WriteLine(file_num);
+                int r = rand.Next(0, file_num-1);
+                string path =files[r];
+                Console.WriteLine("file url : {0}",path);
                 show(path);
             }
         }
